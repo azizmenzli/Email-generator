@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="iso-8859-1">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 5px;
+    }
+    th {
+      background: {{tableBackground}};
+      color: {{tableColor}};
+    }
+    tr.client-row td {
+      border-top: 3px solid black;
+    }
+  </style>
+</head>
+<body lang="fr-TN" >
+    <div id="bodyContent">
+  <p>BONJOUR,</p>
+
+  {{#if (eq company "canpol")}}
+    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE CANPOL TUNIS</p>
+  {{else if (eq company "beureur")}}
+    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE BEUREUR TUNIS</p>
+  {{else if (eq company "titania")}}
+    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE TITANIA TUNIS</p>
+  {{/if}}
+
+  <p>VEUILLEZ TROUVER CI-DESSOUS LES DÉTAILS DE LA COMMANDE :</p>
+
+  <table>
+    <tr>
+      <th>Client</th>
+      <th>Téléphone</th>
+      <th>Adresse</th>
+      <th>Code Saari</th>
+      <th>Produit</th>
+      <th>Quantité</th>
+      <th>Prix TTC</th>
+      <th>TBR</th>
+      <th>Livraison</th>
+      <th>Total</th>
+    </tr>
+    {{#each clients}}
+      {{#each products}}
+        <tr class="{{#if @first}}client-row{{/if}}" >
+          {{#if @first}}
+          <td rowspan="{{../products.length}}">{{../client_name}}</td>
+          <td rowspan="{{../products.length}}">{{../phone}}</td>
+          <td rowspan="{{../products.length}}">{{../address}}</td>
+          {{/if}}
+          <td>{{product_code}}</td>
+          <td>{{product_name}}</td>
+          <td>{{quantity}}</td>
+          <td>{{price_ttc}}</td>
+          {{#if @first}}
+          <td rowspan="{{../products.length}}">{{../order_tbr}}</td>
+          <td rowspan="{{../products.length}}">{{../order_livr}}</td>
+          <td rowspan="{{../products.length}}">{{../order_grand_total}}</td>
+          {{/if}}
+        </tr>
+      {{/each}}
+    {{/each}}
+  </table>
+
+  <p>Merci de me confirmer la réception de la commande.</p>
+</div>
+  <button onclick="copyBodyContent()">Copier tout le contenu</button>
+
+<script>
+  function copyBodyContent() {
+    const bodyContent = document.getElementById('bodyContent');
+    const range = document.createRange();
+    const selection = window.getSelection();
+
+    range.selectNode(bodyContent);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+      document.execCommand('copy');
+      alert('Le contenu complet a été copié dans le presse-papiers.');
+    } catch (err) {
+      alert('Impossible de copier le contenu complet.');
+    }
+
+    selection.removeAllRanges();
+  }
+</script>
+</body>
+</html>
+

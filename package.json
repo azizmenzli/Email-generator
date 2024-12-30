@@ -1,0 +1,15 @@
+{
+  "name": "my-email-app",
+  "version": "1.0.0",
+  "description": "Simple email template generator for non-technical users",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "handlebars": "^4.7.8",
+    "nodemon": "^3.1.9"
+  }
+}
