@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
   
 // Handle form submission
-app.post('/generate', (req, res) => {
+app.post('/template/generate', (req, res) => {
   try {
     const templatePath = path.join(__dirname, 'template.html');
     const templateSource = fs.readFileSync(templatePath, 'utf8');

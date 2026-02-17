@@ -4,28 +4,179 @@
   <meta charset="iso-8859-1">
   <title>Générer un Email</title>
   <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f6f8fa;
+      margin: 0;
+      padding: 0;
     }
-    th, td {
-      border: 1px solid #CCC;
-      padding: 5px;
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: #222;
+      letter-spacing: 1px;
+    }
+    form {
+      background: #fff;
+      max-width: 900px;
+      margin: 30px auto 40px auto;
+      padding: 32px 36px 24px 36px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1.5px 4px rgba(0,0,0,0.03);
+    }
+    label {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+      display: block;
+    }
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px 12px;
+      margin-top: 2px;
+      margin-bottom: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: #fafbfc;
+      transition: border 0.2s;
+    }
+    input:focus, select:focus {
+      border: 1.5px solid #4472C4;
+      outline: none;
+      background: #fff;
     }
     .client-section {
-      margin-bottom: 20px;
-      border: 1px solid #DDD;
-      padding: 10px;
+      margin-bottom: 32px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px 20px 16px 20px;
+      background: #fcfcfd;
+      box-shadow: 0 2px 8px rgba(68,114,196,0.04);
+      position: relative;
+    }
+    .client-section h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #4472C4;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .client-section h4 {
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+    .delete-client-btn {
+      background: #fff0f0;
+      color: #c71553;
+      border: 1px solid #f3c2d3;
+      border-radius: 6px;
+      padding: 7px 16px;
+      font-size: 0.98rem;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 0;
+      float: right;
+      transition: background 0.2s, color 0.2s;
+    }
+    .delete-client-btn:hover {
+      background: #ffe5e5;
+      color: #a00;
+      border-color: #e5a2b3;
+    }
+    .productsTable {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(68,114,196,0.04);
+    }
+    .productsTable th {
+      background: #4472C4;
+      color: #fff;
+      font-weight: 600;
+      padding: 8px 6px;
+      border: none;
+      font-size: 1rem;
+    }
+    .productsTable td {
+      padding: 7px 6px;
+      border-bottom: 1px solid #e5e7eb;
+      background: #fff;
+    }
+    .productsTable tr:last-child td {
+      border-bottom: none;
     }
     .productsTable input {
       width: 100%;
       box-sizing: border-box;
+      padding: 6px 8px;
+      border-radius: 5px;
+      border: 1px solid #d1d5db;
+      background: #f6f8fa;
+      font-size: 0.98rem;
     }
-    .client-section h3 {
-      margin-top: 0;
+    .productsTable input:focus {
+      border: 1.5px solid #4472C4;
+      background: #fff;
     }
-    button {
-      cursor: pointer;
+    button[type="button"] {
+      background: #4472C4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      margin-right: 8px;
+      box-shadow: 0 1px 4px rgba(68,114,196,0.07);
+      transition: background 0.2s, color 0.2s;
+    }
+    button[type="button"]:hover {
+      background: #3557a6;
+      color: #fff;
+    }
+    button[type="submit"] {
+      background: #70ad46;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 28px;
+      font-size: 1.08rem;
+      font-weight: 600;
+      margin-top: 18px;
+      margin-bottom: 0;
+      box-shadow: 0 2px 8px rgba(112,173,70,0.08);
+      transition: background 0.2s, color 0.2s;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button[type="submit"]:hover {
+      background: #5b8e38;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      form {
+        padding: 16px 4vw 16px 4vw;
+      }
+      .client-section {
+        padding: 14px 4vw 10px 4vw;
+      }
+      .productsTable th, .productsTable td {
+        font-size: 0.97rem;
+        padding: 6px 2px;
+      }
     }
   </style>
 </head>
@@ -38,8 +189,11 @@
     <select id="company" name="company" onchange="setCompanyColors()" required>
       <option  selected>Veuillez Selectionner une Entreprise </option>
       <option value="canpol" >Canpol</option>
-      <option value="beureur">Beureur</option>
+      <option value="beureur">Beurer</option>
       <option value="titania">Titania</option>
+      <option value="techwood">Techwood</option>
+      <option value="naturtint">Naturtint</option>
+      <option value="polarbox">Polarbox</option>
     </select>
     <br><br>
 
@@ -86,7 +240,7 @@
               <td><input type="text" name="clients[0][products][0][product_code]" required /></td>
               <td><input type="text" name="clients[0][products][0][product_name]" required /></td>
               <td><input type="number" name="clients[0][products][0][quantity]" value="1" oninput="calculateAllTotals()" min="1" required /></td>
-              <td><input type="number" name="clients[0][products][0][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.01" required /></td>
+              <td><input type="number" name="clients[0][products][0][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.001" required /></td>
               <td><button type="button" onclick="removeProductRow(this)">Supprimer</button></td>
             </tr>
           </tbody>
@@ -97,6 +251,8 @@
         <label>Total Général de la Commande :</label>
         <input type="number" name="clients[0][order_grand_total]" readonly />
         <br><br>
+        <!-- Only show delete button for clients with index > 0 -->
+        <!-- The first client (index 0) does not get a delete button -->
       </div>
     </div>
     <button type="button" onclick="addClientSection()">Ajouter un nouveau client</button>
@@ -125,9 +281,21 @@
           backgroundInput.value = '#ffbaa0';
           colorInput.value = 'black';
           break;
+        case 'techwood':
+          backgroundInput.value = '#FF0000';
+          colorInput.value = '#FFFFFF';
+          break;
+        case 'naturtint':
+          backgroundInput.value = '#70ad46';
+          colorInput.value = '#000000';
+          break;
+        case 'polarbox':
+          backgroundInput.value = '#ffff00';
+          colorInput.value = '#577b84';
+          break;
         default:
           backgroundInput.value = 'black';
-          colorInput.value = '#4472C4';
+          colorInput.value = '#4472C4';  
       }
     }
 
@@ -175,7 +343,7 @@
               <td><input type="text" name="clients[${currentClientIndex}][products][0][product_code]" required /></td>
               <td><input type="text" name="clients[${currentClientIndex}][products][0][product_name]" required /></td>
               <td><input type="number" name="clients[${currentClientIndex}][products][0][quantity]" value="1" oninput="calculateAllTotals()" min="1" required /></td>
-              <td><input type="number" name="clients[${currentClientIndex}][products][0][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.01" required /></td>
+              <td><input type="number" name="clients[${currentClientIndex}][products][0][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.001" required /></td>
               <td><button type="button" onclick="removeProductRow(this)">Supprimer</button></td>
             </tr>
           </tbody>
@@ -186,6 +354,7 @@
         <label>Total Général de la Commande :</label>
         <input type="number" name="clients[${currentClientIndex}][order_grand_total]" readonly />
         <br><br>
+        <button type="button" onclick="removeClientSection(this)" class="delete-client-btn">Supprimer ce client</button>
       `;
 
       clientsContainer.appendChild(newClientSection);
@@ -205,7 +374,7 @@
         <td><input type="text" name="clients[${clientId}][products][${currentRowCount}][product_code]" required /></td>
         <td><input type="text" name="clients[${clientId}][products][${currentRowCount}][product_name]" required /></td>
         <td><input type="number" name="clients[${clientId}][products][${currentRowCount}][quantity]" value="1" oninput="calculateAllTotals()" min="1" required /></td>
-        <td><input type="number" name="clients[${clientId}][products][${currentRowCount}][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.01" required /></td>
+        <td><input type="number" name="clients[${clientId}][products][${currentRowCount}][price_ttc]" oninput="calculateAllTotals()" min="0" step="0.001" required /></td>
         <td><button type="button" onclick="removeProductRow(this)">Supprimer</button></td>
       `;
       tableBody.appendChild(newRow);
@@ -263,8 +432,31 @@
       });
     }
 
+    function removeClientSection(button) {
+      const clientsContainer = document.getElementById('clientsContainer');
+      const clientSections = clientsContainer.querySelectorAll('.client-section');
+      if (clientSections.length <= 1) {
+        // Do not delete if only one client section remains
+        return;
+      }
+      const clientSection = button.closest('.client-section');
+      clientSection.remove();
+      calculateAllTotals();
+    }
+
     // Initial calculation on page load
     window.onload = calculateAllTotals;
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

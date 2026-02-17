@@ -2,76 +2,300 @@
 <html>
 <head>
   <meta charset="iso-8859-1">
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-    }
-    th, td {
-      border: 1px solid black;
-      padding: 5px;
-    }
-    th {
-      background: {{tableBackground}};
-      color: {{tableColor}};
-    }
-    tr.client-row td {
-      border-top: 3px solid black;
-    }
-  </style>
 </head>
-<body lang="fr-TN" >
-    <div id="bodyContent">
-  <p>BONJOUR,</p>
+<body lang="fr-TN">
+<div id="bodyContent" style="font-family: Arial, sans-serif;">
+  <p style="margin-bottom: 1em;">
+    BONJOUR,
+  </p>
 
   {{#if (eq company "canpol")}}
-    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE CANPOL TUNIS</p>
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE CANPOL TUNISIE
+    </p>
   {{else if (eq company "beureur")}}
-    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE BEUREUR TUNIS</p>
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE BEURER TUNISIE
+    </p>
   {{else if (eq company "titania")}}
-    <p>JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE TITANIA TUNIS</p>
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE TITANIA TUNISIE
+    </p>
+  {{else if (eq company "TECHWOOD")}}
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE TECHWOOD TUNISIE
+    </p>
+  {{else if (eq company "NATURTINT ")}}
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE NATURTINT  TUNISIE
+    </p>
+  {{else if (eq company "POLARBOX ")}}
+    <p style="margin-bottom: 1em;">
+      JE VOUS FAIS PARVENIR DES COMMANDES REÇUES SUR LE COMPTE POLARBOX  TUNISIE
+    </p>
   {{/if}}
 
-  <p>VEUILLEZ TROUVER CI-DESSOUS LES DÉTAILS DE LA COMMANDE :</p>
+  <p style="margin-bottom: 1em;">
+    VEUILLEZ TROUVER CI-DESSOUS LES DÉTAILS DE LA COMMANDE :
+  </p>
 
-  <table>
-    <tr>
-      <th>Client</th>
-      <th>Téléphone</th>
-      <th>Adresse</th>
-      <th>Code Saari</th>
-      <th>Produit</th>
-      <th>Quantité</th>
-      <th>Prix TTC</th>
-      <th>TBR</th>
-      <th>Livraison</th>
-      <th>Total</th>
-    </tr>
-    {{#each clients}}
-      {{#each products}}
-        <tr class="{{#if @first}}client-row{{/if}}" >
-          {{#if @first}}
-          <td rowspan="{{../products.length}}">{{../client_name}}</td>
-          <td rowspan="{{../products.length}}">{{../phone}}</td>
-          <td rowspan="{{../products.length}}">{{../address}}</td>
-          {{/if}}
-          <td>{{product_code}}</td>
-          <td>{{product_name}}</td>
-          <td>{{quantity}}</td>
-          <td>{{price_ttc}}</td>
-          {{#if @first}}
-          <td rowspan="{{../products.length}}">{{../order_tbr}}</td>
-          <td rowspan="{{../products.length}}">{{../order_livr}}</td>
-          <td rowspan="{{../products.length}}">{{../order_grand_total}}</td>
-          {{/if}}
-        </tr>
+  <!-- Main Table -->
+  <table 
+    style="
+      border-collapse: collapse; 
+      width: 100%; 
+      max-width: 700px; /* Adjust max-width as needed */
+      table-layout: fixed; 
+      margin-bottom: 1em;"
+  >
+    <thead>
+      <tr>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Client
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Téléphone
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Adresse
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Code Saari
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Produit
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Quantité
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Prix TTC
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          TBR
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Livraison
+        </th>
+        <th 
+          style="
+            border: 1px solid black; 
+            padding: 5px; 
+            background: {{tableBackground}}; 
+            color: {{tableColor}}; 
+            word-break: break-word;
+          "
+        >
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each clients}}
+        {{#each products}}
+          <tr
+            style="
+              border: 1px solid black; 
+              word-break: break-word; 
+              {{#if @first}}border-top: 3px solid black;{{/if}}
+            "
+          >
+            {{#if @first}}
+              <!-- Rowspan cells for first product of each client -->
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../client_name}}
+              </td>
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../phone}}
+              </td>
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../address}}
+              </td>
+            {{/if}}
+            <td 
+              style="
+                border: 1px solid black; 
+                padding: 5px; 
+                vertical-align: top;
+              "  
+            >
+              {{product_code}}
+            </td>
+            <td 
+              style="
+                border: 1px solid black; 
+                padding: 5px; 
+                vertical-align: top;
+              "
+            >
+              {{product_name}}
+            </td>
+            <td 
+              style="
+                border: 1px solid black; 
+                padding: 5px; 
+                vertical-align: top;
+              "
+            >
+              {{quantity}}
+            </td>
+            <td 
+              style="
+                border: 1px solid black; 
+                padding: 5px; 
+                vertical-align: top;
+              "
+            >
+              {{price_ttc}}
+            </td>
+            {{#if @first}}
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../order_tbr}}
+              </td>
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../order_livr}}
+              </td>
+              <td 
+                style="
+                  border: 1px solid black; 
+                  padding: 5px; 
+                  vertical-align: top;
+                " 
+                rowspan="{{../products.length}}"
+              >
+                {{../order_grand_total}}
+              </td>
+            {{/if}}
+          </tr>
+        {{/each}}
       {{/each}}
-    {{/each}}
+    </tbody>
   </table>
 
-  <p>Merci de me confirmer la réception de la commande.</p>
+  <p style="margin-bottom: 1em;">
+    Merci de me confirmer la réception de la commande.
+  </p>
 </div>
-  <button onclick="copyBodyContent()">Copier tout le contenu</button>
+
+<!-- Copy button (optional) -->
+<button 
+  onclick="copyBodyContent()" 
+  style="
+    display: inline-block; 
+    padding: 8px 12px; 
+    font-size: 14px; 
+    cursor: pointer;
+  "
+>
+  Copier tout le contenu
+</button>
 
 <script>
   function copyBodyContent() {
@@ -93,6 +317,6 @@
     selection.removeAllRanges();
   }
 </script>
+
 </body>
 </html>
-
